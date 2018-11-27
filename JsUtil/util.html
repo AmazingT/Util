@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 获取指定key的value
+        var getQueryString = function(key) {
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+            var str = location.search.substr(1).match(reg);
+
+            if(str != null) {
+                return str[2];
+            }
+        };
+
+        // 获取所有参数转对象
+        var parseQueryString = function(url) {
+            // var reg = new RegExp("([^\?\&\=]+)\=([^\?\&\=]*)","g");
+            var reg = /([^\?\&\=]+)\=([^\?\&\=]*)/g;
+            var obj = {};
+            while (reg.test(url)) {
+                obj[RegExp.$1] = RegExp.$2;
+            }
+            return obj;
+        };
+
+        var url = "https://www.baidu.com?name=zb&age=23&sex=man";
+        var person = parseQueryString(url);
+        console.log("name:" + person.name + ";" + "age:" + person.age + ";" + "sex:" + person.sex);    
+    </script>
+</body>
+
+</html>
